@@ -1,20 +1,23 @@
 import './App.css';
 import { useState } from 'react';
 
+
 export function Taskscheduler() {
+    // chartreuse
     const [newTask, setnewTask] = useState("")
     const [taskList, setTaskList] = useState([])
     const [editTask,setEditTask] = useState(null)
+ 
 
     const eventChange = (event,taskName="") => {
         setnewTask(taskName || event.target.value)
-      
     }
 
     const addTasks = () => {
             const task = {
                 id:editTask?editTask.id:(taskList.length===0?1:taskList[taskList.length - 1].id+1),
-                taskName:newTask
+                taskName:newTask,
+                taskDone:"white"
             }
             const newTaskList = editTask?taskList.map((t)=>(t.id===editTask.id)?task:t):[...taskList,task]
             setTaskList(newTaskList)
@@ -31,21 +34,27 @@ export function Taskscheduler() {
     const editTasks = (task) =>{
         setEditTask(task)
         eventChange(null,task.taskName)
-        setnewTask(task.taskName)
-       
-        // setTaskList(taskList.filter((Task)=> task.id!==Task.id?task:(task = {id:task.id,taskName:newTask})))
     }
+    
+   
+        const doneTasks = (task) =>{
+            const updatedTask = {...task, taskDone: task.taskDone === "white"?"chartreuse":"white"};
+            const updatedTaskList = taskList.map((t) => (t.id === task.id ? updatedTask : t));
+            setTaskList(updatedTaskList);
+        }
+        
 
     return (<div className='TaskSchdeuler'>
         <div className='Tasklist'>
-            <input type='text' onChange={eventChange} value = {newTask}/>
-            <button onClick={addTasks}>Add Task</button>
+            <input type='text' className = "textbox-clicked" onChange={eventChange} value = {newTask}/>
+            <button className = "btn" onClick={addTasks}>Add Task</button>
             <ul>{taskList.map((task) => {
-                return <li key = {task} style={{listStyle:'none'}}><div className='task btn'>
+                return <li key = {task} style={{listStyle:'none'}}><div className='task btn' style = {{backgroundColor:task.taskDone}}>
                     <h3>{task.id}</h3>
+                    <input type="checkbox" onClick={()=>doneTasks(task)}></input>
                     <h3 className="space">{task.taskName}</h3>
-                    <button onClick={()=>editTasks(task)}>Edit</button>
-                    <button onClick={()=>deleteTasks(task)}>Delete</button></div></li>
+                    <button className = "btn" onClick={()=>editTasks(task)}><b>Edit</b></button>
+                    <button className = "btn" onClick={()=>deleteTasks(task)}><b>Delete</b></button></div></li>
             })}</ul>
 
 
