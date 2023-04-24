@@ -1,5 +1,9 @@
 import './App.css';
 import { useState } from 'react';
+import { useContext } from 'react';
+import { Appcontext } from './App';
+import { Name } from './Avengers';
+
 
 
 export function Taskscheduler() {
@@ -8,6 +12,7 @@ export function Taskscheduler() {
     const [taskList, setTaskList] = useState([])
     const [editTask,setEditTask] = useState(null)
  
+    const {name} = useContext(Appcontext)
 
     const eventChange = (event,taskName="") => {
         setnewTask(taskName || event.target.value)
@@ -46,6 +51,8 @@ export function Taskscheduler() {
 
     return (<div className='TaskSchdeuler'>
         <div className='Tasklist'>
+            {/* <Name/> */}
+            <h1>{name}</h1>
             <input type='text' className = "textbox-clicked" onChange={eventChange} value = {newTask}/>
             <button className = "btn" onClick={addTasks}>Add Task</button>
             <ul>{taskList.map((task) => {
