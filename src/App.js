@@ -11,6 +11,9 @@ import { Reactquery } from './ReactQuery';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Forms } from './Form'; 
 import { Counter } from './useRefhook';
+import { Arithmetic } from './useReducerhook';
+import { Memohook } from './useMemohook';
+import { Callback } from './useCallback';
 export const Appcontext = createContext()
 export const client = new QueryClient({defaultOptions:{queries:{
   refetchOnWindowFocus:false//Bydefault true means everytime switch tab u get new quote 
@@ -41,12 +44,15 @@ export default function App() {
                 <Route path="/tasks" element={<Taskscheduler />} />
                 <Route path="/pets" element={<Quotes />} />
                 <Route path="/avengers" element={<Name />}> 
-        
+             
                 </Route>
                 <Route path="/avengers/cat" element={<Cat />} />
                 <Route path="/reactquery" element={<Reactquery/>} />
                 <Route path="/forms" element={<Forms/>} />
                 <Route path="/refhook" element={<Counter/>} />
+                <Route path="/reducerhook" element={<Arithmetic/>} />
+                <Route path="/memohook" element={<Memohook/>} />
+                <Route path="/callbackhook" element={<Callback/>} />
                 <Route path="*" element={<h1>Something Went Wrong</h1>} />
               </Routes>
             </Router>

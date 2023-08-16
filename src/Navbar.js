@@ -11,6 +11,9 @@ export const Navbar = () =>{
             <Link  className='btn btn-pro' to="/reactquery">ReactQuery</Link>
             <Link  className='btn btn-pro' to="/forms">Form</Link>
             <Link  className='btn btn-pro' to="/refhook">RefHOOk</Link>
+            <Link  className='btn btn-pro' to="/reducerhook">ReducerHOOk</Link>
+            <Link  className='btn btn-pro' to="/memohook">MemoHOOk</Link>
+            <Link  className='btn btn-pro' to="/callbackhook">CallbackHOOk</Link>
         </div>
     )
 }

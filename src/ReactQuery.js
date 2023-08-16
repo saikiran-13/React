@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+import "./App.css"
 import Axios from "axios"
 import {useFetch} from "./Customhooks"
+
 // import {client} from './App'
 export function Reactquery(){
     const {data,loading} = useFetch('https://api.quotable.io/quotes/random')
@@ -14,6 +16,7 @@ export function Reactquery(){
     if(loading) return <h1>The page is Loading....</h1>
     return(
         <>
+         
              <h1>Random Quote:{quotes}</h1>
         <button className="btn" onClick={refetch}>New Quote</button>
         <h1>New Quote:{data}</h1>
